@@ -8,4 +8,6 @@ make install
 
 ruby --version
 
+gem install bundler --no-ri --no-rdoc
+
 adduser --disabled-login --gecos 'GitLab' ${USER_NAME}
