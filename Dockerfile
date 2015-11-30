@@ -12,7 +12,8 @@ RUN apt-get update; \
 	build-essential zlib1g-dev libyaml-dev libssl-dev libgdbm-dev libreadline-dev \
 	libncurses5-dev libffi-dev curl openssh-server redis-server checkinstall \
 	libxml2-dev libxslt-dev libcurl4-openssl-dev libicu-dev logrotate python-docutils pkg-config \
-	cmake libkrb5-dev nodejs
+	cmake libkrb5-dev nodejs \
+	postgresql-client libpq-dev
 
 # install Ruby 
 RUN mkdir /tmp/ruby && cd /tmp/ruby; \
@@ -34,11 +35,10 @@ COPY assets/ssh/ /root/.ssh/
 RUN chmod 600 /root/.ssh/id_rsa; \
 	ssh-keyscan github.com >> /root/.ssh/known_hosts
 
+# creat postsql
+RUN psql -h 172.17.0.2 -U postgres -d template1 -f ${DOCKER_BUILD_DIR}/create.sql
 
 # Run shell script for build
 RUN bash ${DOCKER_BUILD_DIR}/clone_install.sh
-
-
-
 
 EXPOSE 22 80

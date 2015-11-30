@@ -1,0 +1,2 @@
+CREATE USER git CREATEDB;
+CREATE DATABASE gitlabhq_production OWNER git;

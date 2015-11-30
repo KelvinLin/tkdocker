@@ -1,0 +1,21 @@
+#
+# PRODUCTION
+#
+default: &default
+
+  adapter: postgresql
+  encoding: unicode
+  database: gitlabhq_production 
+  pool: 10
+  hots: '172.17.0.2'
+  port: 5432
+  username: 'git'
+  #username: 'postgres'
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
